@@ -1522,23 +1522,7 @@ alert('Please answer all 10 questions.');
 
 }
 
-});
 
-resetBtn.addEventListener('click', function(){
-
-form.reset();
-
-document.querySelectorAll('.option').forEach(opt=>{
-opt.classList.remove('correct','incorrect');
-});
-
-results.classList.remove('show');
-
-submitBtn.disabled = false;
-
-document.getElementById('quiz').scrollIntoView({
-behavior:'smooth'
-});
 
 });
 
