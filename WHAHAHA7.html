@@ -403,28 +403,43 @@ section{
   padding:35px;
 }
 
-/* AUTHORS */
+/* AUTHORS GRID */
 .author-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:20px;
 }
 
+/* CARD */
 .author-card{
+  position:relative;
   background:rgba(255,255,255,0.04);
-
   border:1px solid var(--border);
-
   border-radius:22px;
-
   padding:30px;
-
   text-align:center;
+  overflow:visible;   /* ✅ FIX */
+  transition:0.3s;
+  z-index:1;
 }
 
-.author-card h3{
-  color:var(--accent2);
-  margin-bottom:10px;
+.author-photo{
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  overflow:hidden;
+  border:3px solid var(--accent2);
+  box-shadow:0 0 25px rgba(0,212,255,0.3);
+
+  margin: -60px auto 15px auto; /* pulls image upward into view */
+  background:#000;
+}
+
+.author-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
 }
 
 /* FOOTER */
@@ -1533,69 +1548,85 @@ alert('Please answer all 10 questions.');
 </section>
 
 <!-- AUTHORS -->
-<section>
+<section id="authors">
+
+<div class="section-title">
+  <h2>Authors</h2>
+  <p>Researchers behind this project</p>
+</div>
+
+</section>
+
+
+
+
+</section>
 
 <div class="author-grid">
 
-<div class="author-card">
-<h3>Aliling, Niño John Carlo</h3>
-<p>Researcher</p>
+  <!-- AUTHOR 1 -->
+  <div class="author-card reveal-author">
+    <div class="author-photo">
+      <img src="ALILING__NIÑO_JOHN_CARLO_B-removebg-preview.png" alt="Aliling Niño John Carlo">
+    </div>
 
-<a href="https://www.facebook.com/ninojohncarlo.aliling"
-target="_blank"
-rel="noopener noreferrer"
-class="btn">
+    <h3>Aliling, Niño John Carlo</h3>
+    <p>Researcher</p>
 
-Visit Social
+    <a href="https://www.facebook.com/ninojohncarlo.aliling"
+       target="_blank"
+       class="btn">
+      Visit Social
+    </a>
+  </div>
 
-</a>
+  <!-- AUTHOR 2 -->
+  <div class="author-card reveal-author">
+    <div class="author-photo">
+      <img src="Cerillo__Ivan_C._BSECE-1B-removebg-preview.png" alt="Ivan C. Cerillo">
+    </div>
 
-</div>
+    <h3>Cerillo, Ivan C.</h3>
+    <p>Researcher</p>
 
-<div class="author-card">
-<h3>Cerillo, Ivan C.</h3>
-<p>Researcher</p>
+    <a href="https://www.facebook.com/ivan.c.cerillo.7"
+       target="_blank"
+       class="btn">
+      Visit Social
+    </a>
+  </div>
 
-<a href="https://www.facebook.com/ivan.c.cerillo.7"
-target="_blank"
-rel="noopener noreferrer"
-class="btn">
+  <!-- AUTHOR 3 -->
+  <div class="author-card reveal-author">
+    <div class="author-photo">
+      <img src="DELA_CONCEPCION__EARL_CEDRIC_P.-removebg-preview.png" alt="Earl Cedrick Dela Concepcion">
+    </div>
 
-Visit Social
+    <h3>Dela Concepcion, Earl Cedrick</h3>
+    <p>Researcher</p>
 
-</a>
+    <a href="https://www.facebook.com/earl.cedric.dela.concepcion.2024"
+       target="_blank"
+       class="btn">
+      Visit Social
+    </a>
+  </div>
 
-</div>
+  <!-- AUTHOR 4 -->
+  <div class="author-card reveal-author">
+    <div class="author-photo">
+      <img src="MAGNO-removebg-preview.png" alt="Marco Ponce Magno">
+    </div>
 
-<div class="author-card">
-<h3>Dela Concepcion, Earl Cedrick</h3>
-<p>Researcher</p>
+    <h3>Magno, Marco Ponce</h3>
+    <p>Researcher</p>
 
-<a href="https://www.facebook.com/earl.cedric.dela.concepcion.2024"
-target="_blank"
-rel="noopener noreferrer"
-class="btn">
-
-Visit Social
-
-</a>
-
-</div>
-
-<div class="author-card">
-<h3>Magno, Marco Ponce</h3>
-<p>Researcher</p>
-
-<a href="https://www.facebook.com/marco.magno.54390"
-target="_blank"
-rel="noopener noreferrer"
-class="btn">
-
-Visit Social
-
-</a>
-
-</div>
+    <a href="https://www.facebook.com/marco.magno.54390"
+       target="_blank"
+       class="btn">
+      Visit Social
+    </a>
+  </div>
 
 </div>
 
@@ -1730,6 +1761,28 @@ trigger:section,
 start:"top 80%"
 }
 });
+
+});
+
+
+
+
+gsap.utils.toArray(".reveal-author").forEach((card, i) => {
+
+  gsap.from(card, {
+    opacity: 0,
+    y: 60,
+    duration: 0.9,
+    delay: i * 0.2, // 👈 one by one effect
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: card,
+      start: "top 85%"
+    },
+    onStart: () => {
+      
+    }
+  });
 
 });
 
