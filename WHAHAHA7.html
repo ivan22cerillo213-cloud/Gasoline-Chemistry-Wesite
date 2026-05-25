@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>The Chemistry of Gasoline</title>
+
+<!-- GOOGLE FONTS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+<!-- FONT AWESOME -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<style>
+
+/* CUSTOM VIDEO SECTION */
+.video-card video{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  border-radius:20px;
+  margin-top:15px;
+  background:#000;
+}
+
+.video-card h3{
+  margin-bottom:15px;
+  color:var(--accent2);
+}
+
+:root{
+  --bg:#071e26;
+  --bg2:#0f2f3a;
+  --card:#143d4a;
+  --accent:#00d4ff;
+  --accent2:#7ef9ff;
+  --text:#eefcff;
+  --muted:#b6d8df;
+  --border:rgba(255,255,255,0.08);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+
+  background-image:
+  radial-gradient(circle at top left, rgba(0,212,255,0.18), transparent 25%),
+  radial-gradient(circle at bottom right, rgba(126,249,255,0.12), transparent 30%);
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{
+  width:10px;
+}
+
+::-webkit-scrollbar-thumb{
+  background:linear-gradient(var(--accent),var(--accent2));
+  border-radius:20px;
+}
+
+/* PROGRESS BAR */
+#progress-bar{
+  position:fixed;
+  top:0;
+  left:0;
+  width:0%;
+  height:5px;
+  z-index:99999;
+
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+
+  box-shadow:0 0 20px var(--accent);
+}
+
+/* NAVIGATION */
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:9999;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  padding:18px 5%;
+
+  backdrop-filter:blur(15px);
+
+  background:rgba(0,0,0,0.45);
+
+  border-bottom:1px solid var(--border);
+}
+
+nav h1{
+  font-family:'Montserrat',sans-serif;
+  font-size:1.2rem;
+  color:var(--accent2);
+  font-weight:800;
+}
+
+nav ul{
+  display:flex;
+  gap:25px;
+  list-style:none;
+}
+
+nav ul li a{
+  text-decoration:none;
+  color:var(--muted);
+  transition:0.3s;
+}
+
+nav ul li a:hover{
+  color:var(--text);
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  position:relative;
+  overflow:hidden;
+
+  background:
+  linear-gradient(rgba(0,0,0,0.72),rgba(0,0,0,0.78)),
+  url('https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1974&auto=format&fit=crop')
+  center/cover no-repeat;
+}
+
+.hero::before{
+  content:'';
+
+  position:absolute;
+
+  width:160%;
+  height:160%;
+
+  background:
+  radial-gradient(circle, rgba(0,212,255,0.15), transparent 35%);
+
+  animation:rotateGlow 25s linear infinite;
+}
+
+@keyframes rotateGlow{
+  from{
+    transform:rotate(0deg);
+  }
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+
+  max-width:1000px;
+
+  padding:20px;
+}
+
+.hero h2{
+  font-family:'Montserrat',sans-serif;
+
+  font-size:4.5rem;
+
+  line-height:1.1;
+
+  margin-bottom:25px;
+
+  background:linear-gradient(90deg,#ffffff,var(--accent2));
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+  color:var(--muted);
+
+  line-height:1.9;
+
+  font-size:1.1rem;
+
+  margin-bottom:40px;
+}
+
+.btn{
+  display:inline-block;
+
+  padding:15px 35px;
+
+  border-radius:50px;
+
+  text-decoration:none;
+
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+
+  color:#000;
+
+  font-weight:700;
+
+  transition:0.3s;
+}
+
+.btn:hover{
+  transform:translateY(-5px);
+
+  box-shadow:0 0 25px rgba(0,212,255,0.35);
+}
+
+/* SECTIONS */
+section{
+  padding:110px 7%;
+}
+
+.section-title{
+  margin-bottom:60px;
+}
+
+.section-title h2{
+  font-family:'Montserrat',sans-serif;
+
+  font-size:3rem;
+
+  margin-bottom:15px;
+
+  background:linear-gradient(90deg,#fff,var(--accent2));
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.section-title p{
+  max-width:900px;
+
+  color:var(--muted);
+
+  line-height:1.9;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:25px;
+}
+
+/* CARD */
+.card{
+  background:rgba(20,61,74,0.9);
+
+  border:1px solid var(--border);
+
+  border-radius:24px;
+
+  padding:30px;
+
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+
+  box-shadow:0 0 30px rgba(0,212,255,0.15);
+}
+
+.card i{
+  font-size:2rem;
+
+  color:var(--accent2);
+
+  margin-bottom:18px;
+}
+
+.card h3{
+  font-size:1.35rem;
+
+  margin-bottom:15px;
+}
+
+.card p{
+  color:var(--muted);
+
+  line-height:1.9;
+}
+
+.card img{
+  width:100%;
+
+  border-radius:18px;
+
+  margin:20px 0;
+}
+
+.card ul{
+  padding-left:20px;
+
+  color:var(--muted);
+
+  line-height:2;
+
+  margin-top:15px;
+}
+
+/* EQUATION */
+.equation-box{
+  text-align:center;
+
+  padding:45px;
+
+  border-radius:24px;
+
+  margin-bottom:50px;
+
+  background:rgba(255,255,255,0.04);
+
+  border:1px solid var(--border);
+}
+
+.equation{
+  font-size:2.2rem;
+
+  font-weight:700;
+
+  font-family:'Montserrat',sans-serif;
+
+  color:var(--accent2);
+}
+
+/* PHOTO PLACEHOLDER */
+.photo-placeholder{
+  width:100%;
+  height:260px;
+
+  border:2px dashed rgba(255,255,255,0.25);
+
+  border-radius:20px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+
+  color:var(--muted);
+
+  margin-top:20px;
+}
+
+.photo-placeholder i{
+  font-size:3rem;
+  margin-bottom:15px;
+}
+
+/* VIDEO */
+.video-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+  gap:25px;
+}
+
+.video-card iframe{
+  width:100%;
+  height:250px;
+  border:none;
+  border-radius:20px;
+}
+
+/* QUIZ */
+.quiz-box{
+  background:rgba(255,255,255,0.04);
+
+  border:1px solid var(--border);
+
+  border-radius:24px;
+
+  padding:35px;
+}
+
+/* AUTHORS */
+.author-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+
+.author-card{
+  background:rgba(255,255,255,0.04);
+
+  border:1px solid var(--border);
+
+  border-radius:22px;
+
+  padding:30px;
+
+  text-align:center;
+}
+
+.author-card h3{
+  color:var(--accent2);
+  margin-bottom:10px;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+
+  padding:50px 20px;
+
+  background:#051218;
+
+  border-top:1px solid var(--border);
+
+  color:var(--muted);
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+
+  .hero h2{
+    font-size:3rem;
+  }
+
+  nav ul{
+    display:none;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .hero h2{
+    font-size:2.2rem;
+  }
+
+  .section-title h2{
+    font-size:2rem;
+  }
+
+  .equation{
+    font-size:1.3rem;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- NAVIGATION -->
+<nav>
+
+<h1>CHEMISTRY OF GASOLINE</h1>
+
+<ul>
+  <li><a href="#intro">Introduction</a></li>
+  <li><a href="#production">Production</a></li>
+  <li><a href="#combustion">Combustion</a></li>
+  <li><a href="#philippines">Philippines</a></li>
+  <li><a href="#environment">Environment</a></li>
+  <li><a href="#quiz">Quiz</a></li>
+</ul>
+
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+
+<div class="hero-content">
+
+<h2>The Chemistry of Gasoline</h2>
+
+<p>
+Gasoline is one of the most important energy sources in modern civilization.
+It is a carefully refined mixture of hydrocarbons derived from crude petroleum
+and engineered to release chemical energy through combustion reactions.
+The chemistry of gasoline involves hydrocarbon structures, refining techniques,
+molecular stability, volatility, combustion reactions, and environmental effects.
+This website explores the scientific principles behind gasoline production,
+chemical composition, energy transformation, and its role in the Philippine
+energy sector.
+</p>
+
+<a href="#intro" class="btn">
+Explore Chemistry
+</a>
+
+</div>
+
+</section>
+
+<!-- INTRODUCTION -->
+<section id="intro">
+
+<div class="section-title">
+
+<h2>Introduction to Gasoline</h2>
+
+<p>
+Gasoline is a volatile and highly flammable liquid fuel produced through the refining of crude oil.
+It contains different hydrocarbon compounds, mostly composed of carbon and hydrogen atoms.
+Most gasoline molecules range from C5 to C12 hydrocarbons. Because gasoline vaporizes easily,
+it mixes rapidly with oxygen and undergoes combustion reactions that release large amounts of energy.
+Gasoline is widely used because of its high energy density, rapid ignition properties,
+and efficient storage and transportation capabilities.
+</p>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<i class="fas fa-flask"></i>
+
+<h3>Chemical Composition</h3>
+
+<img src="https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1974&auto=format&fit=crop">
+
+<p>
+Gasoline is not a single pure substance. It is a mixture of hydrocarbons including alkanes,
+cycloalkanes, and aromatic hydrocarbons.
+</p>
+
+<ul>
+<li>Pentane (C₅H₁₂)</li>
+<li>Hexane (C₆H₁₄)</li>
+<li>Heptane (C₇H₁₆)</li>
+<li>Octane (C₈H₁₈)</li>
+<li>Aromatic compounds</li>
+</ul>
+
+</div>
+
+<div class="card">
+
+<i class="fas fa-atom"></i>
+
+<h3>Properties of Gasoline</h3>
+
+<img src="https://images.unsplash.com/photo-1600661653561-629509216228?q=80&w=1932&auto=format&fit=crop">
+
+<p>
+Gasoline has several important chemical and physical properties that make it an effective fuel.
+Its volatility allows easy vaporization, while its hydrocarbon bonds store large amounts of chemical energy.
+</p>
+
+<ul>
+<li>Highly flammable</li>
+<li>Volatile liquid fuel</li>
+<li>High energy density</li>
+<li>Rapid vaporization</li>
+<li>Contains fuel additives</li>
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PRODUCTION -->
+<section id="production">
+
+<div class="section-title">
+
+<h2>Gasoline Production</h2>
+
+<p>
+Gasoline is produced through petroleum refining and catalytic chemical processes.
+Crude oil undergoes separation and molecular transformation to create usable fuel products.
+</p>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<i class="fas fa-oil-can"></i>
+
+<h3>Crude Oil Extraction</h3>
+
+<p>
+Crude oil is extracted from underground reservoirs using drilling technologies and transported
+to petroleum refineries for chemical processing and separation.
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fas fa-temperature-high"></i>
+
+<h3>Fractional Distillation</h3>
+
+<p>
+In a distillation tower, hydrocarbons separate according to their boiling points.
+Lighter fractions rise higher in the tower while heavier fractions remain lower.
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fas fa-gears"></i>
+
+<h3>Catalytic Cracking</h3>
+
+<p>
+Large hydrocarbon molecules are broken into smaller gasoline-range molecules using catalysts,
+heat, and pressure.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- COMBUSTION -->
+<section id="combustion">
+
+<div class="section-title">
+
+<h2>Combustion Chemistry</h2>
+
+<p>
+Combustion is the chemical reaction between hydrocarbons and oxygen that releases stored chemical energy.
+</p>
+
+</div>
+
+<div class="equation-box">
+
+<div class="equation">
+2C₈H₁₈ + 25O₂ → 16CO₂ + 18H₂O + Energy
+</div>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<i class="fas fa-fire"></i>
+
+<h3>Energy Release</h3>
+
+<p>
+Breaking and reforming chemical bonds during combustion releases energy in the form of heat and light.
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fas fa-cloud"></i>
+
+<h3>Complete Combustion</h3>
+
+<p>
+Complete combustion produces carbon dioxide and water vapor when enough oxygen is present.
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fas fa-smog"></i>
+
+<h3>Incomplete Combustion</h3>
+
+<p>
+Incomplete combustion may produce carbon monoxide, soot, and harmful hydrocarbons.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PHILIPPINES -->
+<section id="philippines">
+
+<div class="section-title">
+
+<h2>Gasoline and Energy in the Philippines</h2>
+
+<p>
+The Philippines is a net energy importer despite having domestic oil, natural gas,
+coal, and renewable energy resources.
+</p>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<i class="fas fa-chart-pie"></i>
+
+<h3>Energy Overview</h3>
+
+<p>
+In 2019, petroleum and other liquids accounted for 45% of total primary energy consumption
+in the Philippines, followed by coal at 36%, natural gas at 7%, non-hydropower renewables at 7%,
+and hydroelectricity at 4%.
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fas fa-industry"></i>
+
+<h3>Petroleum Industry</h3>
+
+<p>
+The Philippines consumed approximately 474,000 barrels of petroleum per day in 2019.
+The country has two major refineries operated by Petron Corporation and Pilipinas Shell Petroleum Corporation.
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fas fa-gas-pump"></i>
+
+<h3>Natural Gas and Coal</h3>
+
+<p>
+The Malampaya gas field is one of the country's major natural gas sources and provides
+up to 20% of Philippine electricity generation.
+Coal also remains a major contributor to electricity production.
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fas fa-bolt"></i>
+
+<h3>Electricity Generation</h3>
+
+<p>
+The Philippines generated approximately 106 billion kilowatt-hours of electricity in 2019,
+with fossil fuels accounting for most of the energy production.
+</p>
+
+</div>
+
+</div>
+
+<!-- CUSTOM VIDEO SECTION -->
+<section id="custom-videos">
+
+<div class="section-title">
+
+<h2>EDUCATIONAL VIDEOS</h2>
+
+<p>
+Learn more about gasolines on these educational videos
+</p>
+
+</div>
+
+<div class="video-grid">
+
+<!-- VIDEO 1 -->
+<div class="card video-card">
+
+<h3>Difference between PETROL and DIESEL</h3>
+
+<video controls width="100%">
+
+<source src="The Differences Between Petrol and Diesel Engines.mp4" type="video/mp4">
+
+Your browser does not support the video tag.
+
+</video>
+
+</div>
+
+<!-- VIDEO 2 -->
+<div class="card video-card">
+
+<h3>How Engines Combust Gasoline</h3>
+
+<video controls width="100%">
+
+<source src="How Engines Combust Gasoline _ What is Gasoline made of_ This is how!  (by Craig Kirkman).mp4" type="video/mp4">
+
+Your browser does not support the video tag.
+
+</video>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ENVIRONMENT -->
+<section id="environment">
+
+<div class="section-title">
+
+<h2>Environmental Effects</h2>
+
+<p>
+Gasoline combustion affects air quality, atmospheric chemistry,
+and global climate systems.
+</p>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<i class="fas fa-earth-americas"></i>
+
+<h3>Greenhouse Gases</h3>
+
+<p>
+Carbon dioxide produced during combustion traps heat in the atmosphere
+and contributes to global warming.
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fas fa-city"></i>
+
+<h3>Photochemical Smog</h3>
+
+<p>
+Nitrogen oxides and hydrocarbons react in sunlight to form photochemical smog
+and tropospheric ozone.
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fas fa-triangle-exclamation"></i>
+
+<h3>Toxic Compounds</h3>
+
+<p>
+Some gasoline components such as benzene may pose health risks and environmental hazards.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- REPLACE YOUR CURRENT QUIZ SECTION WITH THIS -->
+
+<!-- INTERACTIVE QUIZ -->
+<section id="quiz">
+
+<div class="section-title">
+
+<h2>Interactive Quiz</h2>
+
+<p>
+Test your understanding of gasoline chemistry, petroleum refining,
+combustion reactions, and environmental effects.
+</p>
+
+</div>
+
+<div class="quiz-container">
+
+<form id="quizForm">
+
+<!-- QUESTION 1 -->
+<div class="question">
+
+<div class="question-number">Question 1</div>
+
+<div class="question-text">
+Gasoline is primarily composed of:
+</div>
+
+<div class="options">
+
+<label class="option">
+<input type="radio" name="q1" value="a">
+Hydrocarbons
+</label>
+
+<label class="option">
+<input type="radio" name="q1" value="b">
+Pure oxygen
+</label>
+
+<label class="option">
+<input type="radio" name="q1" value="c">
+Water molecules
+</label>
+
+<label class="option">
+<input type="radio" name="q1" value="d">
+Nitrogen gas
+</label>
+
+</div>
+</div>
+
+<!-- QUESTION 2 -->
+<div class="question">
+
+<div class="question-number">Question 2</div>
+
+<div class="question-text">
+Which hydrocarbon is commonly used to measure gasoline octane rating?
+</div>
+
+<div class="options">
+
+<label class="option">
+<input type="radio" name="q2" value="a">
+Methane
+</label>
+
+<label class="option">
+<input type="radio" name="q2" value="b">
+Pentane
+</label>
+
+<label class="option">
+<input type="radio" name="q2" value="c">
+Octane
+</label>
+
+<label class="option">
+<input type="radio" name="q2" value="d">
+Propane
+</label>
+
+</div>
+</div>
+
+<!-- QUESTION 3 -->
+<div class="question">
+
+<div class="question-number">Question 3</div>
+
+<div class="question-text">
+What process separates crude oil into different fractions?
+</div>
+
+<div class="options">
+
+<label class="option">
+<input type="radio" name="q3" value="a">
+Electrolysis
+</label>
+
+<label class="option">
+<input type="radio" name="q3" value="b">
+Fractional Distillation
+</label>
+
+<label class="option">
+<input type="radio" name="q3" value="c">
+Photosynthesis
+</label>
+
+<label class="option">
+<input type="radio" name="q3" value="d">
+Condensation
+</label>
+
+</div>
+</div>
+
+<!-- QUESTION 4 -->
+<div class="question">
+
+<div class="question-number">Question 4</div>
+
+<div class="question-text">
+Gasoline combustion requires:
+</div>
+
+<div class="options">
+
+<label class="option">
+<input type="radio" name="q4" value="a">
+Carbon dioxide
+</label>
+
+<label class="option">
+<input type="radio" name="q4" value="b">
+Nitrogen
+</label>
+
+<label class="option">
+<input type="radio" name="q4" value="c">
+Oxygen
+</label>
+
+<label class="option">
+<input type="radio" name="q4" value="d">
+Hydrogen peroxide
+</label>
+
+</div>
+</div>
+
+<!-- QUESTION 5 -->
+<div class="question">
+
+<div class="question-number">Question 5</div>
+
+<div class="question-text">
+Complete combustion mainly produces:
+</div>
+
+<div class="options">
+
+<label class="option">
+<input type="radio" name="q5" value="a">
+Carbon monoxide and soot
+</label>
+
+<label class="option">
+<input type="radio" name="q5" value="b">
+Carbon dioxide and water
+</label>
+
+<label class="option">
+<input type="radio" name="q5" value="c">
+Hydrogen and oxygen
+</label>
+
+<label class="option">
+<input type="radio" name="q5" value="d">
+Nitrogen oxide only
+</label>
+
+</div>
+</div>
+
+<!-- QUESTION 6 -->
+<div class="question">
+
+<div class="question-number">Question 6</div>
+
+<div class="question-text">
+Which process breaks large hydrocarbons into smaller gasoline molecules?
+</div>
+
+<div class="options">
+
+<label class="option">
+<input type="radio" name="q6" value="a">
+Catalytic Cracking
+</label>
+
+<label class="option">
+<input type="radio" name="q6" value="b">
+Freezing
+</label>
+
+<label class="option">
+<input type="radio" name="q6" value="c">
+Filtration
+</label>
+
+<label class="option">
+<input type="radio" name="q6" value="d">
+Evaporation
+</label>
+
+</div>
+</div>
+
+<!-- QUESTION 7 -->
+<div class="question">
+
+<div class="question-number">Question 7</div>
+
+<div class="question-text">
+What type of fuel is gasoline?
+</div>
+
+<div class="options">
+
+<label class="option">
+<input type="radio" name="q7" value="a">
+Solid fuel
+</label>
+
+<label class="option">
+<input type="radio" name="q7" value="b">
+Liquid fuel
+</label>
+
+<label class="option">
+<input type="radio" name="q7" value="c">
+Nuclear fuel
+</label>
+
+<label class="option">
+<input type="radio" name="q7" value="d">
+Plasma fuel
+</label>
+
+</div>
+</div>
+
+<!-- QUESTION 8 -->
+<div class="question">
+
+<div class="question-number">Question 8</div>
+
+<div class="question-text">
+Gasoline is considered volatile because it:
+</div>
+
+<div class="options">
+
+<label class="option">
+<input type="radio" name="q8" value="a">
+Freezes easily
+</label>
+
+<label class="option">
+<input type="radio" name="q8" value="b">
+Vaporizes easily
+</label>
+
+<label class="option">
+<input type="radio" name="q8" value="c">
+Dissolves metals
+</label>
+
+<label class="option">
+<input type="radio" name="q8" value="d">
+Absorbs water
+</label>
+
+</div>
+</div>
+
+<!-- QUESTION 9 -->
+<div class="question">
+
+<div class="question-number">Question 9</div>
+
+<div class="question-text">
+Which gas contributes most to global warming from gasoline combustion?
+</div>
+
+<div class="options">
+
+<label class="option">
+<input type="radio" name="q9" value="a">
+Oxygen
+</label>
+
+<label class="option">
+<input type="radio" name="q9" value="b">
+Carbon dioxide
+</label>
+
+<label class="option">
+<input type="radio" name="q9" value="c">
+Helium
+</label>
+
+<label class="option">
+<input type="radio" name="q9" value="d">
+Argon
+</label>
+
+</div>
+</div>
+
+<!-- QUESTION 10 -->
+<div class="question">
+
+<div class="question-number">Question 10</div>
+
+<div class="question-text">
+What is the balanced combustion equation for octane?
+</div>
+
+<div class="options">
+
+<label class="option">
+<input type="radio" name="q10" value="a">
+2C₈H₁₈ + 25O₂ → 16CO₂ + 18H₂O
+</label>
+
+<label class="option">
+<input type="radio" name="q10" value="b">
+C₈H₁₈ + H₂ → CO₂
+</label>
+
+<label class="option">
+<input type="radio" name="q10" value="c">
+C₈H₁₈ + O₂ → C + H₂
+</label>
+
+<label class="option">
+<input type="radio" name="q10" value="d">
+8C + 18H → CO₂
+</label>
+
+</div>
+</div>
+
+<button type="submit" class="submit-btn" id="submitBtn">
+Submit Quiz
+</button>
+
+<button type="button" class="reset-btn" id="resetBtn">
+Reset Quiz
+</button>
+
+</form>
+
+<div class="results" id="results">
+
+<h3>Quiz Results</h3>
+
+<p id="scoreText"></p>
+<p id="percentageText"></p>
+<p id="gradeText"></p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ADD THIS CSS INSIDE YOUR EXISTING <style> -->
+
+<style>
+
+/* QUIZ STYLES */
+
+.quiz-container{
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:40px;
+}
+
+.question{
+  margin-bottom:40px;
+  padding-bottom:25px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.question-number{
+  color:var(--accent2);
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.question-text{
+  font-size:1.15rem;
+  margin-bottom:20px;
+  line-height:1.7;
+}
+
+.options{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.option{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  padding:15px 18px;
+  border-radius:14px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.option:hover{
+  background:rgba(0,212,255,0.08);
+}
+
+.option.correct{
+  border-color:#00ff99;
+  background:rgba(0,255,153,0.12);
+}
+
+.option.incorrect{
+  border-color:#ff4d6d;
+  background:rgba(255,77,109,0.12);
+}
+
+.option input{
+  margin-right:10px;
+}
+
+.submit-btn,
+.reset-btn{
+  padding:14px 30px;
+  border:none;
+  border-radius:40px;
+  font-weight:700;
+  cursor:pointer;
+  margin-top:20px;
+  margin-right:10px;
+  transition:0.3s;
+}
+
+.submit-btn{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#000;
+}
+
+.reset-btn{
+  background:#1b2d33;
+  color:#fff;
+}
+
+.submit-btn:hover,
+.reset-btn:hover{
+  transform:translateY(-4px);
+}
+
+.results{
+  display:none;
+  margin-top:40px;
+  padding:30px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.05);
+}
+
+.results.show{
+  display:block;
+}
+
+.results h3{
+  margin-bottom:15px;
+  color:var(--accent2);
+}
+
+.results p{
+  margin-bottom:10px;
+  line-height:1.8;
+}
+
+</style>
+
+<!-- ADD THIS SCRIPT BEFORE </body> -->
+
+<script>
+
+const correctAnswers = {
+q1:'a',
+q2:'c',
+q3:'b',
+q4:'c',
+q5:'b',
+q6:'a',
+q7:'b',
+q8:'b',
+q9:'b',
+q10:'a'
+};
+
+const form = document.getElementById('quizForm');
+
+const submitBtn = document.getElementById('submitBtn');
+
+const resetBtn = document.getElementById('resetBtn');
+
+const results = document.getElementById('results');
+
+const scoreText = document.getElementById('scoreText');
+
+const percentageText = document.getElementById('percentageText');
+
+const gradeText = document.getElementById('gradeText');
+
+form.addEventListener('submit', function(e){
+
+e.preventDefault();
+
+let score = 0;
+let answered = 0;
+
+for(let i=1;i<=10;i++){
+
+const questionName = 'q' + i;
+
+const selectedOption =
+document.querySelector(`input[name="${questionName}"]:checked`);
+
+if(selectedOption){
+
+answered++;
+
+const parentLabel = selectedOption.parentElement;
+
+const allOptions =
+document.querySelectorAll(`input[name="${questionName}"]`);
+
+allOptions.forEach(opt=>{
+opt.parentElement.classList.remove('correct','incorrect');
+});
+
+if(selectedOption.value === correctAnswers[questionName]){
+
+score++;
+
+parentLabel.classList.add('correct');
+
+}else{
+
+parentLabel.classList.add('incorrect');
+
+allOptions.forEach(opt=>{
+
+if(opt.value === correctAnswers[questionName]){
+opt.parentElement.classList.add('correct');
+}
+
+});
+
+}
+
+}
+
+}
+
+if(answered === 10){
+
+const percentage = (score / 10 * 100).toFixed(1);
+
+scoreText.textContent =
+`Score: ${score} / 10`;
+
+percentageText.textContent =
+`Percentage: ${percentage}%`;
+
+let grade = '';
+let message = '';
+
+if(percentage >= 90){
+grade = 'A';
+message = 'Excellent understanding of gasoline chemistry!';
+}
+else if(percentage >= 80){
+grade = 'B';
+message = 'Great job!';
+}
+else if(percentage >= 70){
+grade = 'C';
+message = 'Good work. Review some concepts.';
+}
+else if(percentage >= 60){
+grade = 'D';
+message = 'Passing, but more study is needed.';
+}
+else{
+grade = 'F';
+message = 'Keep reviewing the lessons.';
+}
+
+gradeText.textContent =
+`Grade: ${grade} - ${message}`;
+
+results.classList.add('show');
+
+submitBtn.disabled = true;
+
+results.scrollIntoView({
+behavior:'smooth'
+});
+
+}else{
+
+alert('Please answer all 10 questions.');
+
+}
+
+});
+
+resetBtn.addEventListener('click', function(){
+
+form.reset();
+
+document.querySelectorAll('.option').forEach(opt=>{
+opt.classList.remove('correct','incorrect');
+});
+
+results.classList.remove('show');
+
+submitBtn.disabled = false;
+
+document.getElementById('quiz').scrollIntoView({
+behavior:'smooth'
+});
+
+});
+
+</script>
+
+</div>
+
+</section>
+
+<!-- AUTHORS -->
+<section>
+
+<div class="section-title">
+
+<h2>Researchers and Authors</h2>
+
+<p>
+This educational website was created for chemistry and energy research purposes.
+</p>
+
+</div>
+
+<div class="author-grid">
+
+<div class="author-card">
+<h3>Aliling, Niño John Carlo</h3>
+<p>Researcher</p>
+</div>
+
+<div class="author-card">
+<h3>Cerillo, Ivan C.</h3>
+<p>Researcher</p>
+</div>
+
+<div class="author-card">
+<h3>Dela Concepcion, Earl Cedrick</h3>
+<p>Researcher</p>
+</div>
+
+<div class="author-card">
+<h3>Magno, Marco Ponce</h3>
+<p>Researcher</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- REFERENCES -->
+<!-- CLICKABLE LINK SECTION -->
+<section id="external-links">
+
+<div class="section-title">
+
+<h2>REFERENCES</h2>
+
+
+</div>
+
+<div class="grid">
+
+<!-- LINK CARD 1 -->
+<div class="card">
+
+<i class="fas fa-link"></i>
+
+<h3>U.S. Energy Information Administration</h3>
+
+<p>
+Energy.
+</p>
+
+<a href="https://www.eia.gov"
+target="_blank"
+rel="noopener noreferrer"
+class="btn">
+
+Visit Website
+
+</a>
+
+</div>
+
+<!-- LINK CARD 2 -->
+<div class="card">
+
+<i class="fas fa-globe"></i>
+
+<h3>Britannica</h3>
+
+<p>
+Learn more About Gasoline.
+</p>
+
+<a href="https://www.britannica.com/technology/gasoline-fuel/"
+target="_blank"
+rel="noopener noreferrer"
+class="btn">
+
+Open Link
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+<!-- FOOTER -->
+<footer>
+
+<p>
+© 2026 The Chemistry of Gasoline
+</p>
+
+<p style="margin-top:10px;">
+Educational Chemistry Website Project
+</p>
+
+</footer>
+
+<script>
+
+/* PROGRESS BAR */
+window.addEventListener('scroll',()=>{
+
+const winScroll =
+document.body.scrollTop ||
+document.documentElement.scrollTop;
+
+const height =
+document.documentElement.scrollHeight -
+document.documentElement.clientHeight;
+
+const scrolled =
+(winScroll / height) * 100;
+
+document.getElementById('progress-bar').style.width =
+scrolled + '%';
+
+});
+
+/* GSAP */
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.utils.toArray("section").forEach(section=>{
+
+gsap.from(section,{
+opacity:0,
+y:70,
+duration:1.1,
+ease:"power3.out",
+scrollTrigger:{
+trigger:section,
+start:"top 80%"
+}
+});
+
+});
+
+</script>
+
+</body>
+</html>
